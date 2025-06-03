@@ -15,17 +15,17 @@
        </a>
        <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
          <li>
-           <a href="components-alerts.html">
+           <a href="?page=instructor">
              <i class="bi bi-circle"></i><span>Instructor</span>
            </a>
          </li>
          <li>
-           <a href="components-accordion.html">
+           <a href="?page=major">
              <i class="bi bi-circle"></i><span>major</span>
            </a>
          </li>
          <li>
-           <a href="components-badges.html">
+           <a href="?page=role">
              <i class="bi bi-circle"></i><span>Role</span>
            </a>
          </li>
