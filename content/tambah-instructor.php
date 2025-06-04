@@ -60,7 +60,7 @@ echo $gender == 1 ? 'Laki-laki' : 'Perempuan';
   <div class="col-sm-12">
     <div class="card">
       <div class="card-body">
-        <h5 class="card-title"><?php echo isset($_GET['edit']) ? 'edit' : 'Add' ?> instructor</h5>
+        <h5 class="card-title"><?php echo isset($_GET['edit']) ? 'edit' : 'save' ?> instructor</h5>
         <form action="" method="post">
           <div class="mb-3">
             <label for="">Fullname</label>
