@@ -39,25 +39,20 @@ if(isset($_POST['save'])) {
    }
  }
 
-$roles = ['Instruktur', 'Mahasiswa', 'Admin'];
-$currentRole = isset($rowEdit['name']) ? $rowEdit['name'] : '';
 ?>
 
 <div class="row">
   <div class="col-sm-12">
     <div class="card">
       <div class="card-body">
-        <h5 class="card-title">Add User</h5>
+        <h5 class="card-title"><?php echo isset($_GET['edit']) ? 'edit' : 'Add' ?> Role</h5>
         <form action="" method="post">
-          <div class="mb-4">
-            <select class="form-select" name="name" aria-label="Default select example">
-                <option disabled <?= $currentRole == '' ? 'selected' : '' ?>>Pilih Role Anda</option>
-                <?php foreach ($roles as $role): ?>
-                     <option value="<?= $role ?>" <?= $currentRole == $role ? 'selected' : '' ?>><?= $role ?></option>
-                <?php endforeach; ?>
-            </select>
-          </div>
           <div class="mb-3">
+            <label for="">Role</label>
+            <input type="text" class="form-control" name="name" placeholder="masukkan Role anda"
+              value="<?= isset($rowEdit) && isset($rowEdit['name']) ? $rowEdit['name'] : '' ?>">
+          </div>
+          <div class=" mb-3">
             <input type="submit" class="btn btn-success" name="<?= isset($id) && $id != '' ? 'edit' : 'save'; ?>"
               value=" <?= isset($id) && $id != '' ? 'edit' : 'save'; ?>">
           </div>

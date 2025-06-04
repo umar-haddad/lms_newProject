@@ -5,7 +5,7 @@ if(isset($_POST['save'])) {
 
   $name = $_POST['name'];
   $email = $_POST['email'];
-  $password = $_POST['password'];
+  $password = $_POST['password']; 
   $id_user = isset($_GET['edit']) ? $_GET['edit'] : '';
 
   $insertQ = mysqli_query($config, "INSERT INTO users (name, email, password) VALUES('$name', '$email', '$password')");
@@ -24,7 +24,7 @@ if(isset($_POST['save'])) {
 
   $name = $_POST['name'];
   $email = $_POST['email'];
-  $password = $_POST['password'];
+  $password = isset($_POST['password']) ? sha1($_POST['password']) : $rowEdit['password'];
   $id_user = isset($_GET['edit']) ? $_GET['edit'] : '';
       $queryUpdate = mysqli_query($config, "UPDATE users SET name='$name', email='$email', password='$password' WHERE id='$id' ");
     if ($queryUpdate) {
@@ -51,7 +51,7 @@ if(isset($_POST['save'])) {
   <div class="col-sm-12">
     <div class="card">
       <div class="card-body">
-        <h5 class="card-title">Add User</h5>
+        <h5 class="card-title"><?php echo isset($_GET['edit']) ? 'edit' : 'Add' ?> User</h5>
         <form action="" method="post">
           <div class="mb-3">
             <label for="">Fullname</label>
@@ -65,8 +65,13 @@ if(isset($_POST['save'])) {
           </div>
           <div class="mb-3">
             <label for="">password</label>
-            <input type="password" class="form-control" name="password" placeholder="masukkan password anda"
-              value="<?= isset($rowEdit) && isset($rowEdit['password']) ? $rowEdit['password'] : '' ?>">
+            <input type="password" class="form-control" name="password" placeholder="masukkan password anda" value=""
+              <?php echo empty($id_user) ? "required" : '' ?>>
+            <?php if (isset($_GET['edit'])) : ?>
+            <small>
+              )* eh antum mau ganti password, kamu bisa ganti sekarang
+            </small>
+            <?php endif; ?>
           </div>
           <div class="mb-3">
             <input type="submit" class="btn btn-success" name="<?= isset($id) && $id != '' ? 'edit' : 'save'; ?>"

@@ -45,7 +45,7 @@ if(isset($_POST['save'])) {
   <div class="col-sm-12">
     <div class="card">
       <div class="card-body">
-        <h5 class="card-title">Add User</h5>
+        <h5 class="card-title"><?php echo isset($_GET['edit']) ? 'edit' : 'Add' ?> Major</h5>
         <form action="" method="post">
           <div class="mb-3">
             <label for="">Jurusan</label>

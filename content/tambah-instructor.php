@@ -60,7 +60,7 @@ echo $gender == 1 ? 'Laki-laki' : 'Perempuan';
   <div class="col-sm-12">
     <div class="card">
       <div class="card-body">
-        <h5 class="card-title">Add User</h5>
+        <h5 class="card-title"><?php echo isset($_GET['edit']) ? 'edit' : 'Add' ?> instructor</h5>
         <form action="" method="post">
           <div class="mb-3">
             <label for="">Fullname</label>
@@ -68,8 +68,10 @@ echo $gender == 1 ? 'Laki-laki' : 'Perempuan';
               value="<?= isset($rowEdit) && isset($rowEdit['name']) ? $rowEdit['name'] : '' ?>">
           </div>
           <div class="mb-3">
-            <input type="radio" name="gender" value="1" <?= (isset($_GET['edit']) && $rowEdit['gender'] == '1') ? 'checked' : '' ?> required> Laki-Laki
-            <input type="radio" name="gender" value="0"<?= (isset($_GET['edit']) && $rowEdit['gender'] == '0') ? 'checked' : '' ?> required> Perempuan
+            <input type="radio" name="gender" value="1"
+              <?= (isset($_GET['edit']) && $rowEdit['gender'] == '1') ? 'checked' : '' ?> required> Laki-Laki
+            <input type="radio" name="gender" value="0"
+              <?= (isset($_GET['edit']) && $rowEdit['gender'] == '0') ? 'checked' : '' ?> required> Perempuan
           </div>
           <div class="mb-3">
             <label for="">Education</label>
