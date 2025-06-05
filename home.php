@@ -72,14 +72,17 @@
     <section class="section">
       <?php
           if (isset($_GET['page'])) {
-            if (file_exists("content/" . $_GET['page'] . ".php")) {
+              if (file_exists("content/" . $_GET['page'] . ".php")) {
               include ('content/' . $_GET['page'] . ".php");
                 } else {
-                    include 'content/dashboard.php';
-                      } 
-                } else {
-                     include 'content/user.php';
-                    }
+                    include 'content/notFound.php';
+                  }
+          } else {
+            include 'content/dashboard.php';
+            
+          }
+
+
                     ?>
       <!-- <div class="row">
         <div class="col-lg-6">

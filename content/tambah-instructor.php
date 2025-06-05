@@ -8,10 +8,11 @@ if(isset($_POST['save'])) {
   $education = $_POST['education'];
   $phone = $_POST ['phone'];
   $email = $_POST['email'];
+  $password = $_POST['password'];
   $address = $_POST['address'];
   $id_instructor = isset($_GET['edit']) ? $_GET['edit'] : '';
 
-  $insertQ = mysqli_query($config, "INSERT INTO instructors (name, gender, education, phone, email, address) VALUES('$name', '$gender', '$education', '$phone', '$email', '$address')");
+  $insertQ = mysqli_query($config, "INSERT INTO instructors (name, gender, education, phone, email, password, address) VALUES('$name', '$gender', '$education', '$phone', '$email', $password, '$address')");
   if ($insertQ) {
     header("location:?page=instructor&tambah=berhasil");
   }
@@ -30,9 +31,10 @@ if(isset($_POST['save'])) {
   $education = $_POST['education'];
   $phone = $_POST ['phone'];
   $email = $_POST['email'];
+  $password = isset($_POST['password']) ? sha1($_POST['password']) : $rowEdit['password'];
   $address = $_POST['address'];
   $id_instructor = isset($_GET['edit']) ? $_GET['edit'] : '';
-      $queryUpdate = mysqli_query($config, "UPDATE instructors SET name='$name', gender='$gender', education='$education', phone='$phone', email='$email', address='$address' WHERE id='$id' ");
+      $queryUpdate = mysqli_query($config, "UPDATE instructors SET name='$name', gender='$gender', education='$education', phone='$phone', email='$email', password='$password', address='$address' WHERE id='$id' ");
     if ($queryUpdate) {
         header("location:?page=instructor&update=berhasil");
     }
@@ -52,8 +54,7 @@ if(isset($_POST['save'])) {
  }
 
 $gender = $rowEdit['gender'];
-
-echo $gender == 1 ? 'Laki-laki' : 'Perempuan';
+$gender == 1 ? 'Laki-laki' : 'Perempuan';
 ?>
 
 <div class="row">
@@ -79,7 +80,7 @@ echo $gender == 1 ? 'Laki-laki' : 'Perempuan';
               value="<?= isset($rowEdit) && isset($rowEdit['education']) ? $rowEdit['education'] : '' ?>">
           </div>
           <div class="mb-3">
-            <label for="">Email</label>
+            <label for="">Phone</label>
             <input type="number" class="form-control" name="phone" placeholder="masukkan phone anda"
               value="<?= isset($rowEdit) && isset($rowEdit['phone']) ? $rowEdit['phone'] : '' ?>">
           </div>
@@ -87,6 +88,17 @@ echo $gender == 1 ? 'Laki-laki' : 'Perempuan';
             <label for="">Email</label>
             <input type="email" class="form-control" name="email" placeholder="masukkan email anda"
               value="<?= isset($rowEdit) && isset($rowEdit['email']) ? $rowEdit['email'] : '' ?>">
+          </div>
+          <div class="mb-3">
+            <label for="">password</label>
+            <input type="password" class="form-control" name="password" placeholder="masukkan password anda"
+              value="<?= isset($rowEdit) && isset($rowEdit['password']) ? $rowEdit['password'] : '' ?>"
+              <?php echo empty($id_user) ? "required" : '' ?>>
+            <?php if (isset($_GET['edit'])) : ?>
+            <small>
+              )* eh antum mau ganti password, kamu bisa ganti sekarang
+            </small>
+            <?php endif; ?>
           </div>
           <div class="mb-3">
             <label for="">address</label>

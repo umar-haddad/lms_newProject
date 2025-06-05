@@ -4,13 +4,20 @@ session_start();
 if(isset($_POST['email'])) {
   $email = $_POST['email'];
   $password = $_POST['password'];
+  $role = $_POST['role'];
 
+
+  if ($role == 1) {
+    $queryLogin = mysqli_query($config, "SELECT * FROM instructors WHERE email='$email' AND password ='$password'");
+  } else {
+    $queryLogin = mysqli_query($config, "SELECT * FROM users WHERE email='$email' AND password ='$password'");
+  }
   //tampilkan semua data dari table user dimana email diambil dari orang yang input email dan password
   // diambil dari orang yang input password
-  $queryLogin = mysqli_query($config, "SELECT * FROM users WHERE email='$email' AND password ='$password'");
+ 
   
   // jika data ditemukan, mysqli_num_rows("hasil query")
-  if(mysqli_num_rows($queryLogin) > 0) {
+  if (mysqli_num_rows($queryLogin) > 0) {
     // header("location:namafile.php"): "meredirect / lempar ke halaman lain"
     $rowLogin = (mysqli_fetch_assoc($queryLogin));
     $_SESSION['ID_USER'] = $rowLogin['id'];
@@ -19,7 +26,9 @@ if(isset($_POST['email'])) {
   } else {
     header("location:index.php&login=error");
   }
+
 }
+
 
 ?>
 
@@ -106,6 +115,17 @@ if(isset($_POST['email'])) {
                       <label for="yourPassword" class="form-label">Password</label>
                       <input type="password" name="password" class="form-control" id="yourPassword" required>
                       <div class="invalid-feedback">Please enter your password!</div>
+                    </div>
+
+                    <div class="col-12">
+                      <label for="yourRole" class="form-label">Role *</label>
+                      <select name="role" id="yourRole" class="form-control" required>
+                        <option value="">Pilih role --</option>
+                        <option value="1">Instruktur</option>
+                        <option value="2">Siswa</option>
+                        <option value="3">Lainnya</option>
+                      </select>
+                      <div class="invalid-feedback">please Select your Role</div>
                     </div>
 
                     <div class="col-12">
