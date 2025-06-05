@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 04, 2025 at 10:29 AM
+-- Generation Time: Jun 05, 2025 at 10:12 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -34,6 +34,7 @@ CREATE TABLE `instructors` (
   `education` varchar(30) NOT NULL,
   `phone` varchar(15) NOT NULL,
   `email` varchar(50) NOT NULL,
+  `password` varchar(100) NOT NULL,
   `address` text NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `update_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp()
@@ -43,9 +44,11 @@ CREATE TABLE `instructors` (
 -- Dumping data for table `instructors`
 --
 
-INSERT INTO `instructors` (`id`, `name`, `gender`, `education`, `phone`, `email`, `address`, `created_at`, `update_at`) VALUES
-(1, 'Pak agra', 1, 'SMK 100', '085772169466', 'agra12@gmail.com', 'jln.Cipinang Besar Selatan, KAMP.Besar, Cipinang Besar Selatan', '2025-06-04 02:36:21', '2025-06-04 02:55:45'),
-(2, 'bang will', 1, 'Nusa Mandiri', '083342334521', 'william123@gmail.com', 'jln.surabaya Nasgor manchester united', '2025-06-04 07:04:20', NULL);
+INSERT INTO `instructors` (`id`, `name`, `gender`, `education`, `phone`, `email`, `password`, `address`, `created_at`, `update_at`) VALUES
+(1, 'Pak agra', 1, 'SMK 100', '085772169466', 'agra12@gmail.com', '', 'jln.Cipinang Besar Selatan, KAMP.Besar, Cipinang Besar Selatan', '2025-06-04 02:36:21', '2025-06-04 02:55:45'),
+(2, 'bang will', 1, 'Nusa Mandiri', '083342334521', 'william123@gmail.com', '', 'jln.surabaya Nasgor manchester united', '2025-06-04 07:04:20', NULL),
+(4, 'rehan', 1, 'SMK 100', '85772169466', 'berak@gmail.com', '12345', 'jln.surabaya Nasgor manchester united', '2025-06-05 07:43:09', NULL),
+(5, 'Superadmin', 0, 'Nusa Mandiri', '85772169466', 'admin123@gmail.com', '12345', 'jln.surabaya Nasgor manchester united', '2025-06-05 08:05:12', NULL);
 
 -- --------------------------------------------------------
 
@@ -66,8 +69,12 @@ CREATE TABLE `instructors_majors` (
 --
 
 INSERT INTO `instructors_majors` (`id`, `id_major`, `id_instructor`, `created_at`, `update_at`) VALUES
-(21, 4, 0, '2025-06-04 08:12:09', NULL),
-(24, 3, 17, '2025-06-04 08:14:09', NULL);
+(3, 4, 1, '2025-06-05 02:17:28', NULL),
+(5, 2, 1, '2025-06-05 02:17:53', '2025-06-05 02:41:35'),
+(7, 5, 2, '2025-06-05 03:38:07', NULL),
+(8, 4, 4, '2025-06-05 07:44:46', NULL),
+(9, 3, 4, '2025-06-05 07:44:50', NULL),
+(10, 5, 4, '2025-06-05 07:44:52', NULL);
 
 -- --------------------------------------------------------
 
@@ -89,7 +96,8 @@ CREATE TABLE `majors` (
 INSERT INTO `majors` (`id`, `name`, `created_at`, `update_at`) VALUES
 (2, 'Matematika', '2025-06-04 02:35:21', NULL),
 (3, 'web programming', '2025-06-04 06:35:51', NULL),
-(4, 'Design Graphic', '2025-06-04 07:06:19', NULL);
+(4, 'Design Graphic', '2025-06-04 07:06:19', NULL),
+(5, 'Gamers', '2025-06-05 03:37:58', NULL);
 
 -- --------------------------------------------------------
 
@@ -113,6 +121,8 @@ CREATE TABLE `module_details` (
 
 CREATE TABLE `moduls` (
   `id` int(11) NOT NULL,
+  `id_major` int(11) NOT NULL,
+  `id_instructor` int(11) NOT NULL,
   `name` int(122) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `update_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp()
@@ -217,19 +227,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `instructors`
 --
 ALTER TABLE `instructors`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `instructors_majors`
 --
 ALTER TABLE `instructors_majors`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `majors`
 --
 ALTER TABLE `majors`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `module_details`
