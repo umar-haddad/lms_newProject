@@ -1,0 +1,23 @@
+Tugas Membuat Databases menggunakan Join
+
+sintaks pada data table 
+orders = CREATE TABLE orders (id INT AUTO_INCREMENT PRIMARY KEY, user_id INT, product_name VARCHAR(50), FOREIGN KEY (user_id) REFERENCES users(id));
+users = CREATE TABLE users ( id INT(11) AUTO_INCREMENT PRIMARY KEY, name VARCHAR(50));
+
+nambah data 
+Table users = INSERT INTO `users`(`id`, `name`) VALUES ('[value-1]','Terdaftar');
+Table Users = INSERT INTO `users`(`id`, `name`) VALUES ('[value-1]','tidak Terdaftar');
+
+Table orders =  INSERT INTO `users`(`id`, `user_id`, `product_name`) VALUES ('[value-1]', '1','Nasi Cakalang')
+Table orders =  INSERT INTO `users`(`id`, `user_id`, `product_name`) VALUES ('[value-1]', '2',' ')
+Table orders =  INSERT INTO `users`(`id`, `user_id`, `product_name`) VALUES ('[value-1]', '1','sosis Bakar')
+
+
+a. Menampilkan semua pengguna dan pesanan mereka
+SELECT users.*, orders.* FROM `users` LEFT JOIN orders ON orders.user_id = users.id
+
+b. Menampilkan pengguna yang tidak memiliki pesanan
+SELECT orders.*, users.* FROM orders LEFT JOIN users ON users.id = orders.user_id WHERE orders.product_name IS NULL;
+
+c. Menampilkan pesanan yang tidak memiliki pengguna terdaftar
+SELECT orders.product_name FROM `orders` RIGHT JOIN users ON users.id = orders.user_id WHERE users.name IS NULL

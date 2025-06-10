@@ -9,6 +9,8 @@ if(isset($_POST['email'])) {
 
   if ($role == 1) {
     $queryLogin = mysqli_query($config, "SELECT * FROM instructors WHERE email='$email' AND password ='$password'");
+  } elseif ($role == 2) {
+    $queryLogin = mysqli_query($config, "SELECT * FROM students WHERE email='$email' AND password ='$password'");
   } else {
     $queryLogin = mysqli_query($config, "SELECT * FROM users WHERE email='$email' AND password ='$password'");
   }
@@ -22,6 +24,7 @@ if(isset($_POST['email'])) {
     $rowLogin = (mysqli_fetch_assoc($queryLogin));
     $_SESSION['ID_USER'] = $rowLogin['id'];
     $_SESSION['NAME'] = $rowLogin['name'];
+    $_SESSION['ID_ROLE'] = $role;
     header("location:home.php");
   } else {
     header("location:index.php&login=error");
@@ -122,7 +125,7 @@ if(isset($_POST['email'])) {
                       <select name="role" id="yourRole" class="form-control" required>
                         <option value="">Pilih role --</option>
                         <option value="1">Instruktur</option>
-                        <option value="2">Siswa</option>
+                        <option value="2">Student</option>
                         <option value="3">Lainnya</option>
                       </select>
                       <div class="invalid-feedback">please Select your Role</div>
