@@ -1,3 +1,5 @@
+<!-- base On nya sama kaya tambah user -->
+
 <?php 
 if(isset($_POST['save'])) {
   // ada tidak parameter bernama edit kalo ada jalankan perintah edit/update, kalo tidak ada
@@ -39,10 +41,12 @@ if(isset($_POST['save'])) {
    }
  }
  
- $id_instructor = isset($_SESSION['ID_USER']) ? $_SESSION['ID_USER'] : '';
+ $id_instructor = isset($_SESSION['ID_USER']) ? $_SESSION['ID_USER'] : ''; //cek id_instructor yang menjadi ID_USER untuk header nanti
  
- $queryInstructorMajors = mysqli_query($config, "SELECT majors.name, instructors_majors.*
- FROM instructors_majors 
+ // buat query dimana table majors colom name, table instructors_major all, dari table instructors_major Join ke majors 
+ //diambil pada majors colom id masukkan ke instructors_major di kolom id_major diambil instructors_major.id_instrutor
+ $queryInstructorMajors = mysqli_query($config, "SELECT majors.name, instructors_majors.* 
+ FROM instructors_majors  
  LEFT JOIN majors ON majors.id = instructors_majors.id_major 
  WHERE instructors_majors.id_instructor = '$id_instructor'");
  $rowInstructorMajor = mysqli_fetch_all($queryInstructorMajors, MYSQLI_ASSOC);

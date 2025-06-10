@@ -1,7 +1,9 @@
+<!-- base On nya sama kaya tambah user -->
+
 <?php 
 if(isset($_POST['save'])) {
   // ada tidak parameter bernama edit kalo ada jalankan perintah edit/update, kalo tidak ada
-  // tambah data baru /insert
+  // tambah data baru /insert 
 
   $name = $_POST['name'];
   $id_role = isset($_GET['edit']) ? $_GET['edit'] : '';

@@ -1,5 +1,5 @@
 <?php 
-$query = mysqli_query($config, "SELECT * FROM roles ORDER BY id DESC");
+$query = mysqli_query($config, "SELECT * FROM roles ORDER BY id DESC"); //ambil data dari table roles dari colom id
 $rows = mysqli_fetch_all($query, MYSQLI_ASSOC);
 
 ?>

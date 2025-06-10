@@ -45,8 +45,13 @@ $rowEdit = mysqli_fetch_assoc($queryEdit);
     }
 }
 
-
-$queryInstructorMajor = mysqli_query($config, "SELECT majors.name, instructors_majors.id, id_instructor FROM instructors_majors LEFT JOIN majors ON majors.id = instructors_majors.id_major WHERE id_instructor = '$id' ORDER BY instructors_majors.id DESC");
+// Cara nya emang sama dengan query moduls tapi ini nyambungin majors, instructor_majors dari instructors_majors
+//Join nya ke major di mana diambil dari id_instructor order ke instructors_majors by id
+$queryInstructorMajor = mysqli_query($config, "SELECT majors.name, instructors_majors.id, id_instructor 
+FROM instructors_majors 
+LEFT JOIN majors ON majors.id = instructors_majors.id_major
+WHERE id_instructor = '$id' 
+ORDER BY instructors_majors.id DESC");
 $rowInstrutorMajors = mysqli_fetch_all($queryInstructorMajor, MYSQLI_ASSOC);
 
   

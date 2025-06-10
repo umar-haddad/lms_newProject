@@ -1,3 +1,5 @@
+<!-- base On nya sama kaya tambah user -->
+
 <?php 
 if(isset($_POST['save'])) {
   // ada tidak parameter bernama edit kalo ada jalankan perintah edit/update, kalo tidak ada
@@ -31,6 +33,7 @@ if(isset($_POST['save'])) {
   $education = $_POST['education'];
   $phone = $_POST ['phone'];
   $email = $_POST['email'];
+  //Variabel password ada gak si password kalo ada jadiin sha1(bcrypt) kalo gak buat password baru
   $password = isset($_POST['password']) ? sha1($_POST['password']) : $rowEdit['password'];
   $address = $_POST['address'];
   $id_instructor = isset($_GET['edit']) ? $_GET['edit'] : '';

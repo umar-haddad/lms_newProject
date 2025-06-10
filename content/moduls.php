@@ -1,4 +1,8 @@
 <?php 
+
+//buat Query dimana ambil data dari majors kolom name terus as(dijadiin alias), instructors kolom name, dan moduls all
+//si moduls Join ke table majors lewat majors.id di taro di moduls kolom id_major, dan Join juga si instructors 
+//lewat instructors.id di taro pada moduls.id_instructor SEMUA AMBIL DARI ID TABLE MODULS
 $query = mysqli_query($config, "SELECT majors.name as major_name, instructors.name as instructor_name, moduls.* 
 FROM moduls 
 LEFT JOIN majors ON majors.id = moduls.id_major 

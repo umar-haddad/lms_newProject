@@ -1,6 +1,6 @@
 <?php 
 if(isset($_POST['save'])) {
-  // ada tidak parameter bernama edit kalo ada jalankan perintah edit/update, kalo tidak ada
+  // buat sebuah tambah user diambil dari data table users
   // tambah data baru /insert
 
   $name = $_POST['name'];
@@ -14,9 +14,9 @@ if(isset($_POST['save'])) {
   }
 }
 
-  $header = isset($_GET['edit']) ? "save" : "edit";
-  $id = isset($_GET['edit']) ? $_GET['edit'] : '';
-  $query_Edit = mysqli_query($config, "SELECT * FROM users WHERE id='$id'");
+  $header = isset($_GET['edit']) ? "save" : "edit"; // ambil name edit ada gak kalo ada jadi edit kalo gak ada jadi save
+  $id = isset($_GET['edit']) ? $_GET['edit'] : ''; //buat parameter id ini bisa di edit 
+  $query_Edit = mysqli_query($config, "SELECT * FROM users WHERE id='$id'"); //ambil semua data dari users.id
   $rowEdit = mysqli_fetch_assoc($query_Edit);
 
   if(isset($_POST['edit'])) {
@@ -35,7 +35,7 @@ if(isset($_POST['save'])) {
   
 
 
- if(isset($_GET['delete'])){
+ if(isset($_GET['delete'])){ // name delete ada isinya gak kalo ada hapus dari id nya 
    $id_user = isset($_GET['delete']) ? $_GET['delete'] : '' ;
    $queryDelete = mysqli_query($config, "UPDATE users SET deleted_at = 1 WHERE id='$id_user'");
    if ($queryDelete) {

@@ -1,3 +1,5 @@
+<!-- base On nya sama kaya tambah user -->
+
 <?php 
 if(isset($_POST['save'])) {
   // ada tidak parameter bernama edit kalo ada jalankan perintah edit/update, kalo tidak ada

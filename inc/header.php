@@ -1,5 +1,5 @@
 <?php 
-$name = isset($_SESSION['NAME']) ? $_SESSION['NAME'] : '' ;
+$name = isset($_SESSION['NAME']) ? $_SESSION['NAME'] : '' ; //ini diambil dari index agar dapat mengambil name nya 
 ?>
 
 
