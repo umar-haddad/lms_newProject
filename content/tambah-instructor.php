@@ -1,3 +1,5 @@
+<!-- base On nya sama kaya tambah user -->
+
 <?php 
 if(isset($_POST['save'])) {
   // ada tidak parameter bernama edit kalo ada jalankan perintah edit/update, kalo tidak ada
@@ -10,9 +12,10 @@ if(isset($_POST['save'])) {
   $email = $_POST['email'];
   $password = $_POST['password'];
   $address = $_POST['address'];
+  $id_role = 4;
   $id_instructor = isset($_GET['edit']) ? $_GET['edit'] : '';
 
-  $insertQ = mysqli_query($config, "INSERT INTO instructors (name, gender, education, phone, email, password, address) VALUES('$name', '$gender', '$education', '$phone', '$email', $password, '$address')");
+  $insertQ = mysqli_query($config, "INSERT INTO instructors (name, gender, education, phone, email, password, address, role) VALUES('$name', '$gender', '$education', '$phone', '$email', $password, '$address', '$id_role')");
   if ($insertQ) {
     header("location:?page=instructor&tambah=berhasil");
   }
@@ -33,8 +36,9 @@ if(isset($_POST['save'])) {
   $email = $_POST['email'];
   $password = isset($_POST['password']) ? sha1($_POST['password']) : $rowEdit['password'];
   $address = $_POST['address'];
+    $id_role = 4;
   $id_instructor = isset($_GET['edit']) ? $_GET['edit'] : '';
-      $queryUpdate = mysqli_query($config, "UPDATE instructors SET name='$name', gender='$gender', education='$education', phone='$phone', email='$email', password='$password', address='$address' WHERE id='$id' ");
+      $queryUpdate = mysqli_query($config, "UPDATE instructors SET id_role='$id_role', name='$name', gender='$gender', education='$education', phone='$phone', email='$email', password='$password', address='$address' WHERE id='$id' ");
     if ($queryUpdate) {
         header("location:?page=instructor&update=berhasil");
     }

@@ -1,50 +1,55 @@
- <aside id="sidebar" class="sidebar">
+<?php 
+  $queryMainMenu = mysqli_query($config, "SELECT * FROM menus WHERE parent_id = 0 OR parent_id='' ");
+  $rowMainMenu = mysqli_fetch_all($queryMainMenu, MYSQLI_ASSOC);
+?>
 
-   <ul class="sidebar-nav" id="sidebar-nav">
+<aside id="sidebar" class="sidebar">
 
-     <li class="nav-item">
-       <a class="nav-link collapsed" href="index.html">
-         <i class="bi bi-grid"></i>
-         <span>Dashboard</span>
-       </a>
-     </li><!-- End Dashboard Nav -->
+  <ul class="sidebar-nav" id="sidebar-nav">
 
-     <li class="nav-item">
-       <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
-         <i class="bi bi-menu-button-wide"></i><span>Master Data</span><i class="bi bi-chevron-down ms-auto"></i>
-       </a>
-       <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-         <li>
-           <a href="?page=instructor">
-             <i class="bi bi-circle"></i><span>Instructor</span>
-           </a>
-         </li>
-         <li>
-           <a href="?page=major">
-             <i class="bi bi-circle"></i><span>major</span>
-           </a>
-         </li>
-         <li>
-           <a href="?page=role">
-             <i class="bi bi-circle"></i><span>Role</span>
-           </a>
-         </li>
-         <li>
-           <a href="?page=user">
-             <i class="bi bi-circle"></i><span>User</span>
-           </a>
-         </li>
-       </ul>
-     </li>
+    <?php foreach ($rowMainMenu as $mainMenu) : ?>
 
-     <li class="nav-heading">Pages</li>
+    <?php 
+      $id_menu = $mainMenu['id'];
+          $querySubMenu = mysqli_query($config, "SELECT * FROM menus WHERE parent_id ='$id_menu' ORDER BY urutan ASC");
+        ?>
+    <?php if(mysqli_num_rows($querySubMenu) > 0): ?>
+    <li class="nav-item">
+      <a class="nav-link collapsed" data-bs-target="#menu-<?php echo $mainMenu['id'] ?>" data-bs-toggle="collapse"
+        href="#">
+        <i class="<?php echo $mainMenu['icon'] ?>"></i><span><?php echo $mainMenu['name'] ?></span><i
+          class="bi bi-chevron-down ms-auto"></i>
+      </a>
+      <ul id="menu-<?php echo $mainMenu['id']?>" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+        <?php while ($rowSubMenu = mysqli_fetch_assoc($querySubMenu)): ?>
+        <li>
+          <a href="?page=<?php echo $rowSubMenu['url'] ?> ">
+            <i class="<?php echo $rowSubMenu['icon'] ?>"></i><span><?php echo $rowSubMenu['name'] ?></span>
+          </a>
+        </li>
+        <?php endwhile; ?>
+      </ul>
+    </li>
+    <?php elseif(!empty($mainMenu['url'])) : ?>
+    <li class="nav-item">
+      <a class="nav-link collapsed" href="<?php echo $mainMenu['url'] ?>">
+        <i class="<?php echo $mainMenu['icon'] ?>"></i>
+        <span><?php echo $mainMenu['name'] ?></span>
+      </a>
+    </li>
+    <!--End Dashboard Nav -->
+    <?php endif; ?>
+    <?php endforeach; ?>
 
-     <li class="nav-item">
-       <a class="nav-link collapsed" href="?page=moduls">
-         <i class="bi bi-book"></i>
-         <span>Module</span>
-       </a>
-     </li><!-- End Profile Page Nav -->
-   </ul>
+    <li class=" nav-heading">Pages
+    </li>
 
- </aside>
+    <li class="nav-item">
+      <a class="nav-link collapsed" href="?page=moduls">
+        <i class="bi bi-book"></i>
+        <span>Module</span>
+      </a>
+    </li><!-- End Profile Page Nav -->
+  </ul>
+
+</aside>

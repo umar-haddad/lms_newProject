@@ -4,19 +4,21 @@ $id_role = isset($_SESSION['ID_ROLE']) ? $_SESSION['ID_ROLE'] : "" ;
 
 //
 $rowStudents = mysqli_fetch_assoc(mysqli_query($config, "SELECT * FROM students WHERE id='$id_user'"));
-$id_major =$rowStudents['id'];
+$id_major = isset($rowStudents['id']) ? $rowStudents['id'] : '';
 
-if($id_role == 2) {
+if($id_role == 6) { // data diambil dari role si student dimana hanya liat tidak ada aksi 
   $where = "WHERE moduls.id_major='$id_major'";
-} elseif ($id_role == 1) {
-  $where = "WHERE moduls.id_major='$id_user'";
+} elseif ($id_role == 4) { // data diambil dari si role instructor
+  $where = "WHERE moduls.id_instructor='$id_user'";
 }
+
+//buat Query dimana ambil data dari majors kolom name terus as(dijadiin alias), instructors kolom name, dan moduls all
+//si moduls Join ke table majors lewat majors.id di taro di moduls kolom id_major, dan Join juga si instructors 
+//lewat instructors.id di taro pada moduls.id_instructor SEMUA AMBIL DARI ID TABLE MODULS
 $query = mysqli_query($config, "SELECT majors.name as major_name, instructors.name as instructor_name, moduls.* 
 FROM moduls 
 LEFT JOIN majors ON majors.id = moduls.id_major 
-LEFT JOIN instructors ON instructors.id = moduls.id_instructor 
-$where
-ORDER BY moduls.id 
+LEFT JOIN instructors ON instructors.id = moduls.id_instructor $where ORDER BY moduls.id 
 DESC");
 $rows = mysqli_fetch_all($query, MYSQLI_ASSOC);
 
@@ -28,7 +30,7 @@ $rows = mysqli_fetch_all($query, MYSQLI_ASSOC);
     <div class="card">
       <div class="card-body">
         <h5 class="card-title"> Data Modul</h5>
-        <?php if($_SESSION['ID_ROLE'] == 1) : ?>
+        <?php if(canAddModul(6)) : ?>
         <div class="mb-3" align="right">
           <a href="?page=tambah-modul" class="btn btn-primary">Add Modul</a>
         </div>
@@ -52,8 +54,10 @@ $rows = mysqli_fetch_all($query, MYSQLI_ASSOC);
                 <td><?php echo $row['instructor_name'] ?></td>
                 <td><?php echo $row['major_name'] ?></td>
                 <td>
+                  <?php if ($id_role == 4): ?>
                   <a onclick="return confirm('bener gak mau dihapus?')"
                     href="?page=tambah-modul&delete=<?php echo $row['id']?>" class="btn btn-danger">Delete</a>
+                  <?php endif ?>
                 </td>
               </tr>
               <?php endforeach ?>

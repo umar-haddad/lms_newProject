@@ -1,3 +1,5 @@
+<!-- BASE ON NYA MAH SAMA KAYA SI DOKUMEN role.php -->
+
 <?php 
 $query = mysqli_query($config, "SELECT * FROM majors ORDER BY id DESC");
 $rows = mysqli_fetch_all($query, MYSQLI_ASSOC);
