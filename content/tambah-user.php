@@ -5,7 +5,7 @@ if(isset($_POST['save'])) {
 
   $name = $_POST['name'];
   $email = $_POST['email'];
-  $password = $_POST['password']; 
+  $password = sha1($_POST['password']); 
   $id_user = isset($_GET['edit']) ? $_GET['edit'] : '';
 
   $insertQ = mysqli_query($config, "INSERT INTO users (name, email, password) VALUES('$name', '$email', '$password')");

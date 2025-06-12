@@ -26,6 +26,8 @@ $rows = mysqli_fetch_all($query, MYSQLI_ASSOC);
                 <td><?php echo $key += 1; ?></td>
                 <td><?php echo $row['name'] ?></td>
                 <td>
+                  <a href="?page=tambah-role&add-role-menu=<?php echo $row ['id']?>" class="btn btn-success">add Role
+                    menu</a>
                   <a href="?page=tambah-role&edit=<?php echo $row ['id']?>" class="btn btn-primary">Edit</a>
                   <a onclick="return confirm('bener gak mau dihapus?')"
                     href="?page=tambah-role&delete=<?php echo $row ['id']?>" class="btn btn-danger">Delete</a>

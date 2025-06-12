@@ -10,17 +10,20 @@ if($id_role == 6) { // data diambil dari role si student dimana hanya liat tidak
   $where = "WHERE moduls.id_major='$id_major'";
 } elseif ($id_role == 4) { // data diambil dari si role instructor
   $where = "WHERE moduls.id_instructor='$id_user'";
+} else {
+  $where = "WHERE moduls.id_instructor='$id_user'";
 }
 
-//buat Query dimana ambil data dari majors kolom name terus as(dijadiin alias), instructors kolom name, dan moduls all
-//si moduls Join ke table majors lewat majors.id di taro di moduls kolom id_major, dan Join juga si instructors 
-//lewat instructors.id di taro pada moduls.id_instructor SEMUA AMBIL DARI ID TABLE MODULS
 $query = mysqli_query($config, "SELECT majors.name as major_name, instructors.name as instructor_name, moduls.* 
 FROM moduls 
 LEFT JOIN majors ON majors.id = moduls.id_major 
 LEFT JOIN instructors ON instructors.id = moduls.id_instructor $where ORDER BY moduls.id 
 DESC");
 $rows = mysqli_fetch_all($query, MYSQLI_ASSOC);
+
+//buat Query dimana ambil data dari majors kolom name terus as(dijadiin alias), instructors kolom name, dan moduls all
+//si moduls Join ke table majors lewat majors.id di taro di moduls kolom id_major, dan Join juga si instructors 
+//lewat instructors.id di taro pada moduls.id_instructor SEMUA AMBIL DARI ID TABLE MODULS
 
 
 ?>
