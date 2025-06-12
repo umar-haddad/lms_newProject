@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 11 Jun 2025 pada 10.17
+-- Waktu pembuatan: 12 Jun 2025 pada 09.53
 -- Versi server: 10.4.32-MariaDB
 -- Versi PHP: 8.2.12
 
@@ -123,9 +123,55 @@ INSERT INTO `menus` (`id`, `parent_id`, `name`, `icon`, `url`, `urutan`, `create
 (2, 0, 'master data', 'bi bi-menu-button-wide', '', 2, '2025-06-11 04:29:56', '2025-06-11 05:28:24'),
 (5, 2, 'Instructors', 'bi bi-circle', 'instructor', 1, '2025-06-11 05:29:59', '2025-06-11 06:48:43'),
 (6, 2, 'major', 'bi bi-circle', 'major', 2, '2025-06-11 05:29:59', '2025-06-11 06:37:28'),
-(7, 2, 'Menu', 'bi bi-circle', 'menu', 3, '2025-06-11 06:31:03', NULL),
-(8, 2, 'Users', 'bi bi-circle', 'user', 4, '2025-06-11 06:38:50', '2025-06-11 08:10:01'),
-(9, 2, 'Roles', 'bi bi-circle', 'role', 5, '2025-06-11 06:56:42', '2025-06-11 08:08:31');
+(7, 2, 'Menu', 'bi bi-circle', 'menu', 3, '2025-06-11 06:31:03', '2025-06-12 01:12:13'),
+(8, 2, 'Users', 'bi bi-circle', 'user', 4, '2025-06-11 06:38:50', '2025-06-12 01:11:35'),
+(9, 2, 'Roles', 'bi bi-circle', 'role', 5, '2025-06-11 06:56:42', '2025-06-11 08:08:31'),
+(10, 0, 'Module', 'bi bi-book', '?page=moduls', 8, '2025-06-12 06:55:07', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `menu_roles`
+--
+
+CREATE TABLE `menu_roles` (
+  `id` int(11) NOT NULL,
+  `id_roles` int(11) NOT NULL,
+  `id_menu` int(11) NOT NULL,
+  `created_at` int(11) NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data untuk tabel `menu_roles`
+--
+
+INSERT INTO `menu_roles` (`id`, `id_roles`, `id_menu`, `created_at`) VALUES
+(9, 3, 1, 2147483647),
+(10, 3, 2, 2147483647),
+(11, 3, 5, 2147483647),
+(12, 3, 6, 2147483647),
+(13, 3, 7, 2147483647),
+(14, 3, 8, 2147483647),
+(15, 3, 9, 2147483647),
+(16, 2, 1, 2147483647),
+(17, 2, 2, 2147483647),
+(18, 2, 5, 2147483647),
+(19, 2, 6, 2147483647),
+(20, 2, 7, 2147483647),
+(21, 2, 8, 2147483647),
+(22, 2, 9, 2147483647),
+(25, 5, 1, 2147483647),
+(26, 5, 5, 2147483647),
+(27, 5, 6, 2147483647),
+(28, 5, 7, 2147483647),
+(29, 5, 10, 2147483647),
+(30, 6, 1, 2147483647),
+(31, 6, 10, 2147483647),
+(43, 4, 6, 2147483647),
+(44, 4, 7, 2147483647),
+(45, 4, 8, 2147483647),
+(46, 4, 9, 2147483647),
+(47, 4, 10, 2147483647);
 
 -- --------------------------------------------------------
 
@@ -244,8 +290,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `created_at`, `update_at`, `deleted_at`) VALUES
-(1, 'umar', 'admin@gmail.com', '12345', '2025-06-03 02:50:21', '2025-06-11 08:02:35', 0),
-(7, 'anjirlah', 'kakkkak@gmail.com', '20202020', '2025-06-03 08:07:04', '2025-06-11 08:02:41', 0);
+(1, 'umar', 'admin@gmail.com', '8cb2237d0679ca88db6464eac60da96345513964', '2025-06-03 02:50:21', '2025-06-12 01:17:18', 0),
+(7, 'anjirlah', 'kakkkak@gmail.com', '20202020', '2025-06-03 08:07:04', '2025-06-11 08:02:41', 0),
+(9, 'umar', 'umar@gmail.com', '8cb2237d0679ca88db6464eac60da96345513964', '2025-06-12 01:19:03', NULL, 0);
 
 --
 -- Indexes for dumped tables
@@ -273,6 +320,12 @@ ALTER TABLE `majors`
 -- Indeks untuk tabel `menus`
 --
 ALTER TABLE `menus`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indeks untuk tabel `menu_roles`
+--
+ALTER TABLE `menu_roles`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -331,7 +384,13 @@ ALTER TABLE `majors`
 -- AUTO_INCREMENT untuk tabel `menus`
 --
 ALTER TABLE `menus`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT untuk tabel `menu_roles`
+--
+ALTER TABLE `menu_roles`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT untuk tabel `module_details`
@@ -349,7 +408,7 @@ ALTER TABLE `moduls`
 -- AUTO_INCREMENT untuk tabel `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT untuk tabel `students`
@@ -361,7 +420,7 @@ ALTER TABLE `students`
 -- AUTO_INCREMENT untuk tabel `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
